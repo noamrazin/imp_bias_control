@@ -1,0 +1,101 @@
+{
+  "name": "Pendulum experiments plan example",
+  "description": "",
+  "skip": 0,
+  "repetitions": 5,
+  "largest": false,
+  "multiprocess": false,
+  "num_parallel": 1,
+  "gpu_ids_pool": [],
+  "configurations": [
+    {
+      "base_config": {
+        "experiment_name": "pend_fit_test_{controller}_depth_{controller_depth}_hdim_{controller_hidden_dim}_opt_{optimizer}_lr_{lr}",
+        "random_seed": -1,
+        "gpu_ids": [],
+        "trainer_checkpoint": "",
+        "epochs": 75000,
+        "validate_every": 100,
+        "outputs_dir": "outputs/pend/fit_test",
+        "disable_console_log": false,
+        "save_logs": true,
+        "train_batch_log_interval": -1,
+        "epoch_log_interval": 100,
+        "save_metric_plots": true,
+        "save_every_num_val": 100,
+        "use_tensorboard": false,
+        "use_wandb": false,
+        "wandb_project_name": "pendulum",
+        "wandb_entity_name": "",
+        "wandb_resume_path": "",
+        "wandb_track_model": null,
+        "wandb_exclude_files": [
+          "plots/**"
+        ],
+        "score_metric_name": "train cost",
+        "is_train_metric": true,
+        "score_largest": false,
+        "return_best_score": true,
+        "save_checkpoints": false,
+        "num_checkpoints": 1,
+        "save_checkpoints_by_score": false,
+        "early_stop": true,
+        "early_stop_min_delta": 0.00001,
+        "early_stop_patience": 50,
+        "early_stop_cooldown": 0,
+        "early_stop_restore_best_weights": true,
+        "load_dataset_to_gpu": true,
+        "train_time_horizon": 100,
+        "test_time_horizon": 100,
+        "control_norm_cost_coeff": 0,
+        "controller": "mlp",
+        "controller_hidden_dim": 50,
+        "controller_depth": 4,
+        "controller_init_std": 0.01,
+        "controller_zero_init": false,
+        "controller_identity_init": false,
+        "initial_states_rnd_seed": -1,
+        "train_initial_states_type": "custom",
+        "custom_initial_states_angles": [
+          2.641,
+          3.641
+        ],
+        "adversarial_initial_states_angles": [],
+        "adversarial_initial_states_cost_coeff": 0.1,
+        "num_train_initial_states": 2,
+        "test_initial_angles": [
+          0,
+          0.7853981852531433,
+          1.5707963705062866,
+          2.356194496154785,
+          3.1415927410125732,
+          3.9269909858703613,
+          4.71238899230957,
+          5.4977874755859375
+        ],
+        "optimizer": "sgd",
+        "lr": 0.0005
+      },
+      "options": {
+        "custom_initial_states_angles": [
+          [
+            0,
+            0.785,
+            1.57,
+            4.71,
+            5.497
+          ]
+        ],
+        "test_initial_angles": [
+          [
+            0,
+            0.785,
+            1.57,
+            4.71,
+            5.497
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,82 @@
+{
+  "name": "Quadcopter experiments plan example",
+  "description": "",
+  "skip": 0,
+  "repetitions": 5,
+  "largest": false,
+  "multiprocess": false,
+  "num_parallel": 1,
+  "gpu_ids_pool": [],
+  "configurations": [
+    {
+      "base_config": {
+        "experiment_name": "quad_dist_fit_test_{controller}_depth_{controller_depth}_hdim_{controller_hidden_dim}_opt_{optimizer}_lr_{lr}",
+        "random_seed": -1,
+        "gpu_ids": [],
+        "trainer_checkpoint": "",
+        "epochs": 15000,
+        "validate_every": 100,
+        "outputs_dir": "outputs/quad_dist/fit_test",
+        "disable_console_log": false,
+        "save_logs": true,
+        "train_batch_log_interval": -1,
+        "epoch_log_interval": 100,
+        "save_metric_plots": true,
+        "save_every_num_val": 1,
+        "use_tensorboard": false,
+        "use_wandb": false,
+        "wandb_project_name": "quadcopter",
+        "wandb_entity_name": "",
+        "wandb_resume_path": "",
+        "wandb_track_model": null,
+        "wandb_exclude_files": [
+          "plots/**"
+        ],
+        "score_metric_name": "train cost",
+        "is_train_metric": true,
+        "score_largest": false,
+        "return_best_score": true,
+        "save_checkpoints": false,
+        "num_checkpoints": 1,
+        "save_checkpoints_by_score": false,
+        "early_stop": true,
+        "early_stop_min_delta": 0.00001,
+        "early_stop_patience": 50,
+        "early_stop_cooldown": 0,
+        "early_stop_restore_best_weights": true,
+        "load_dataset_to_gpu": true,
+        "train_time_horizon": 50,
+        "test_time_horizon": 50,
+        "target_state": [0, 0, 1],
+        "target_state_cost_coeffs": [1, 1, 1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1],
+        "controller": "mlp",
+        "controller_hidden_dim": 50,
+        "controller_depth": 4,
+        "controller_init_std": 0.01,
+        "controller_zero_init": false,
+        "controller_identity_init": false,
+        "initial_states_rnd_seed": -1,
+        "train_initial_states_type": "custom",
+        "custom_train_initial_states_pos": [[0,0,0],[0.5,0.5,0.5], [0.5, -0.5, 0.5], [-0.5, 0.5, 0.5], [-0.5, -0.5, 0.5]],
+        "num_train_initial_states": 1,
+        "adversarial_initial_states_pos": [],
+        "adversarial_initial_states_cost_coeff": 0.1,
+        "test_initial_states_type": "custom",
+        "custom_test_initial_states_pos": [[0.5, 0.5, 0], [0.5, 0.5, 0.25], [1, 1, 0], [0,0,1]],
+        "num_test_initial_states": 4,
+        "quad_plot_lim": 1.2,
+        "save_quad_animation": false,
+        "optimizer": "adam",
+        "lr": 0.0003
+      },
+      "options": {
+         "custom_train_initial_states_pos": [
+          [[0, 0, 0.5], [0.25, 0, 0.5], [0.75, 0, 0.5], [1, 0, 0.5], [1.25, 0, 0.5]]
+         ],
+        "custom_test_initial_states_pos": [
+          [[0, 0, 0.5], [0.25, 0, 0.5], [0.75, 0, 0.5], [1, 0, 0.5], [1.25, 0, 0.5]]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+{
+  "name": "LQR experiments plan example",
+  "description": "",
+  "skip": 0,
+  "repetitions": 1,
+  "largest": false,
+  "multiprocess": false,
+  "num_parallel": 1,
+  "gpu_ids_pool": [],
+  "configurations": [
+    {
+      "base_config": {
+        "experiment_name": "lqr_tstate_{train_initial_states_type}_system_{linear_system}_horizon_{train_time_horizon}_sd_dim_{state_dim}_cd_{control_dim}_ntrain_{num_train_initial_states}_lr_{lr}",
+        "random_seed": -1,
+        "gpu_ids": [],
+        "trainer_checkpoint": "",
+        "epochs": 100000,
+        "validate_every": 100,
+        "outputs_dir": "outputs/lqr",
+        "disable_console_log": false,
+        "save_logs": true,
+        "train_batch_log_interval": -1,
+        "epoch_log_interval": 1000,
+        "save_metric_plots": true,
+        "save_every_num_val": 10,
+        "use_tensorboard": false,
+        "use_wandb": false,
+        "wandb_project_name": "lqr_synthetic",
+        "wandb_entity_name": "",
+        "wandb_resume_path": "",
+        "wandb_track_model": null,
+        "wandb_exclude_files": [
+          "plots/**"
+        ],
+        "score_metric_name": "train cost",
+        "is_train_metric": true,
+        "score_largest": false,
+        "return_best_score": false,
+        "save_checkpoints": false,
+        "num_checkpoints": 1,
+        "save_checkpoints_by_score": false,
+        "early_stop": false,
+        "early_stop_min_delta": 0.0001,
+        "early_stop_patience": 50,
+        "early_stop_cooldown": 0,
+        "early_stop_restore_best_weights": false,
+        "load_dataset_to_gpu": false,
+        "train_time_horizon": 5,
+        "test_time_horizon": -1,
+        "state_dim": 5,
+        "control_dim": 5,
+        "controller_init_std": 0.01,
+        "controller_zero_init": true,
+        "mats_init_std": -1,
+        "linear_system": "custom_rnd",
+        "system_rnd_seed": -1,
+        "train_initial_states_type": "e",
+        "num_train_initial_states": 1,
+        "lr": 0.001
+      },
+      "options": {
+        "linear_system": [
+          "identity",
+          "custom_rnd",
+          "shift"
+        ],
+        "num_train_initial_states": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "system_rnd_seed": [
+          1752,
+          1347,
+          783,
+          208,
+          617,
+          431,
+          1824,
+          1671,
+          547,
+          1177,
+          461,
+          1308,
+          1617,
+          873,
+          1296,
+          842,
+          758,
+          992,
+          727,
+          852
+        ]
+      }
+    }
+  ]
+}
