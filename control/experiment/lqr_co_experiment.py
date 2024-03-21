@@ -200,18 +200,21 @@ class LQRControllerOptimizationExperiment(FitExperimentBase):
         train_eval = TrainBatchOutputEvaluator(metric_names=["train cost", "excess train cost"])
 
         test_time_horizon = config["test_time_horizon"] if config["test_time_horizon"] >= 0 else config["train_time_horizon"]
-        state["initial train cost"] = self.__compute_cost(model, datamodule.train_initial_states, config["train_time_horizon"])
-        state["initial test cost"] = self.__compute_cost(model, datamodule.test_initial_states, test_time_horizon)
+        model.to(device)
+        state["initial train cost"] = self.__compute_cost(model, datamodule.train_initial_states.to(device), config["train_time_horizon"])
+        state["initial test cost"] = self.__compute_cost(model, datamodule.test_initial_states.to(device), test_time_horizon)
 
         if config["state_dim"] <= config["control_dim"]:
             state["min L2 controller test cost"] = self.__compute_test_cost_for_min_L2_norm_train_controller(model,
                                                                                                              datamodule.train_initial_states,
                                                                                                              datamodule.test_initial_states,
-                                                                                                             test_time_horizon)
+                                                                                                             test_time_horizon,
+                                                                                                             device=device)
 
         if torch.allclose(model.system.R, torch.zeros_like(model.system.R)):
-            state["minimal train cost"] = self.__compute_first_state_cost(model, datamodule.train_initial_states)
-            state["minimal test cost"] = self.__compute_first_state_cost(model, datamodule.test_initial_states)
+            model.to(device)
+            state["minimal train cost"] = self.__compute_first_state_cost(model, datamodule.train_initial_states.to(device))
+            state["minimal test cost"] = self.__compute_first_state_cost(model, datamodule.test_initial_states.to(device))
             state["initial normalized optimality extrapolation measure"] = LQRValidationEvaluator.compute_normalized_optimality_measure(model,
                                                                                                                                         datamodule.test_initial_states)
 
@@ -255,15 +258,20 @@ class LQRControllerOptimizationExperiment(FitExperimentBase):
             return cost.mean().item()
 
     def __compute_test_cost_for_min_L2_norm_train_controller(self, model: ControlledDynamicalSystemImpl, train_initial_states: torch.Tensor,
-                                                             test_initial_states: torch.Tensor, time_horizon: int):
+                                                             test_initial_states: torch.Tensor, time_horizon: int, device=None):
         with torch.no_grad():
             Q, R = torch.linalg.qr(train_initial_states.t().unsqueeze(dim=0))
             proj_to_train_initial_states_mat = torch.matmul(Q[0], Q[0].t())
 
             min_L2_norm_train_controller_mat = - torch.matmul(proj_to_train_initial_states_mat,
                                                               torch.matmul(model.system.A, torch.linalg.pinv(model.system.B)))
+
+            if device:
+                model.to(device)
+                min_L2_norm_train_controller_mat = min_L2_norm_train_controller_mat.to(device)
+
             controller = lambda x: torch.matmul(x, min_L2_norm_train_controller_mat)
-            return self.__compute_cost(model, test_initial_states, time_horizon, custom_controller=controller)
+            return self.__compute_cost(model, test_initial_states.to(device), time_horizon, custom_controller=controller)
 
     def create_trainer(self, model: ControlledDynamicalSystemImpl, datamodule: InitialStatesDataModule, train_evaluator: TrainEvaluator,
                        val_evaluator: Evaluator, callback: Callback, device, config: dict, state: dict, logger: logging.Logger) -> Trainer:
