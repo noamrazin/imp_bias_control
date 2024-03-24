@@ -96,7 +96,7 @@ class PendulumControllerOptimizationExperiment(FitExperimentBase):
         return datamodule
 
     def create_model(self, datamodule: InitialStatesDataModule, config: dict, state: dict, logger: logging.Logger) -> nn.Module:
-        system = Pendulum(control_norm_cost_coeff=config["control_norm_cost_coeff"])
+        system = Pendulum()
 
         if config["controller"] == "linear_nn":
             controller = LinearNNStateController(state_dim=system.get_state_dim(), control_dim=system.get_control_dim(),

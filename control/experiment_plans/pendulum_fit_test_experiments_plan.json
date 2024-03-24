@@ -47,7 +47,6 @@
         "load_dataset_to_gpu": true,
         "train_time_horizon": 100,
         "test_time_horizon": 100,
-        "control_norm_cost_coeff": 0,
         "controller": "mlp",
         "controller_hidden_dim": 50,
         "controller_depth": 4,
