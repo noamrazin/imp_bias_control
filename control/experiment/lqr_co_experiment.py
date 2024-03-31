@@ -226,7 +226,7 @@ class LQRControllerOptimizationExperiment(FitExperimentBase):
         return train_eval, val_evaluator
 
     def get_default_score_info(self, config: dict, state: dict) -> ScoreInfo:
-        return ScoreInfo(metric_name="train cost", is_train_metric=False, largest=False, return_best_score=False)
+        return ScoreInfo(metric_name="train cost", is_train_metric=True, largest=False, return_best_score=False)
 
     def create_additional_metadata_to_log(self, model: ControlledDynamicalSystemImpl, datamodule: InitialStatesDataModule,
                                           config: dict, state: dict,
