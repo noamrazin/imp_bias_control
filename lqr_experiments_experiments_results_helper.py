@@ -172,7 +172,7 @@ def __create_and_save_bar_plot(per_group_per_x_metrics: dict, xlabel: str = "", 
         plt.show()
 
 
-def plot_metric_for_two_group_keys(experiments_dir: List[str], first_group_key: str, second_group_key: str, x_axis_key: str, metric_name: str,
+def plot_metric_for_two_group_keys(experiments_dir: str, first_group_key: str, second_group_key: str, x_axis_key: str, metric_name: str,
                                    keys_to_exclude_values_dict: dict = None, save_plot_to: str = ""):
     per_key_metrics_values = __extract_per_key_metrics_values(experiments_dir, [first_group_key, second_group_key, x_axis_key], [metric_name],
                                                               keys_to_exclude_values_dict)
@@ -198,7 +198,7 @@ def plot_metric_for_two_group_keys(experiments_dir: List[str], first_group_key: 
                                                   save_plot_to=save_plot_to)
 
 
-def plot_metric(experiments_dir: List[str], group_key: str, x_axis_key: str, metric_name: str, keys_to_exclude_values_dict: dict = None,
+def plot_metric(experiments_dir: str, group_key: str, x_axis_key: str, metric_name: str, keys_to_exclude_values_dict: dict = None,
                 custom_colors: List = None, save_plot_to: str = ""):
     per_key_metrics_values = __extract_per_key_metrics_values(experiments_dir, [group_key, x_axis_key], [metric_name],
                                                               keys_to_exclude_values_dict)
@@ -220,7 +220,7 @@ def plot_metric(experiments_dir: List[str], group_key: str, x_axis_key: str, met
                                custom_colors=custom_colors, save_plot_to=save_plot_to)
 
 
-def print_metrics(experiments_dir: List[str], aggr_keys: List[str], metric_names: List[str], keys_to_exclude_values_dict: dict = None):
+def print_metrics(experiments_dir: str, aggr_keys: List[str], metric_names: List[str], keys_to_exclude_values_dict: dict = None):
     per_key_metrics_values = __extract_per_key_metrics_values(experiments_dir, aggr_keys, metric_names, keys_to_exclude_values_dict)
 
     print(f"Experiments directory: {experiments_dir}\n"
