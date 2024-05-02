@@ -1,7 +1,7 @@
-# Implicit Bias of Policy Gradient in Linear Quadratic Control: Extrapolation to Unseen Initial States
+# Implicit Bias of Policy Gradient in Linear Quadratic Control: Extrapolation to Unseen Initial States (ICML 2024)
 
 Official implementation for the experiments
-in [Implicit Bias of Policy Gradient in Linear Quadratic Control: Extrapolation to Unseen Initial States](https://arxiv.org/abs/2402.07875), based on
+in [Implicit Bias of Policy Gradient in Linear Quadratic Control: Extrapolation to Unseen Initial States](https://arxiv.org/abs/2402.07875) (ICML 2024), based on
 the [PyTorch](https://pytorch.org/) and [Torchdyn](https://github.com/DiffEqML/torchdyn) libraries.
 
 <br>
@@ -134,10 +134,10 @@ Plots will be saved by default in the directory ```outputs/plots```.
 For citing the paper you can use:
 
 ```
-@article{razin2024implicit,
+@inproceedings{razin2024implicit,
   title={Implicit Bias of Policy Gradient in Linear Quadratic Control: Extrapolation to Unseen Initial States},
   author={Razin, Noam and Alexander, Yotam and Cohen-Karlik, Edo and Giryes, Raja and Globerson, Amir and Cohen, Nadav},
-  journal={arXiv preprint arXiv:2402.07875},
+  booktitle={International Conference on Machine Learning},
   year={2024}
 }
 ```
