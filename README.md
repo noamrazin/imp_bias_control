@@ -23,7 +23,7 @@ Tested with Python 3.9.
 pip install -r requirements.txt
 ```
 
-## 1. Liner Quadratic Control (Section 5.1)
+## 1. Linear Quadratic Control (Section 5.1)
 
 ### 1.1 Running Experiments
 
